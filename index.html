@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LetrALeve</title>
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27045142718457656');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=27045142718457656&ev=PageView&noscript=1"
+/></noscript>
+<script src="https://supermago.b-cdn.net/supermago.js?ver=20250224" defer></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e8f4fd 0%, #f0faf4 100%);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .card {
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.10);
+    max-width: 520px; width: 100%;
+    padding: 36px 32px;
+    animation: fadeIn .4s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+  .hero-emoji { font-size: 3rem; text-align: center; margin-bottom: 12px; }
+  .hero h1 { font-size: 1.55rem; color: #1a2e4a; text-align: center; line-height: 1.35; margin-bottom: 8px; }
+  .hero h1 span { color: #27ae60; }
+  .hero p { text-align: center; color: #5a7a8a; font-size: .95rem; margin-bottom: 28px; }
+  .btn-primary {
+    display: block; width: 100%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    color: #fff; font-size: 1.05rem; font-weight: 700;
+    border: none; border-radius: 12px; padding: 16px;
+    cursor: pointer; transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,.35); }
+  .hero-sub { text-align: center; color: #95aab5; font-size: .82rem; margin-top: 10px; }
+  .progress-wrap { margin-bottom: 22px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .8rem; color: #95aab5; margin-bottom: 6px; }
+  .progress-bar { background: #eaf4fb; border-radius: 99px; height: 7px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #2980b9, #27ae60); border-radius: 99px; transition: width .5s ease; }
+  .q-num { font-size: .78rem; color: #27ae60; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .q-text { font-size: 1.15rem; font-weight: 700; color: #1a2e4a; margin-bottom: 22px; line-height: 1.35; }
+  .options { display: flex; flex-direction: column; gap: 11px; }
+  .opt {
+    border: 2px solid #e3eef8; border-radius: 12px;
+    padding: 14px 16px; cursor: pointer;
+    font-size: .95rem; color: #2c3e50;
+    transition: all .18s; background: #f7fbff;
+    text-align: left; display: flex; align-items: center; gap: 12px;
+  }
+  .opt:hover { border-color: #27ae60; background: #edfaf3; }
+  .opt-letter {
+    min-width: 28px; height: 28px; border-radius: 50%;
+    background: #ddeef8; color: #2980b9; font-weight: 700;
+    font-size: .85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .loading { text-align: center; padding: 16px 0; }
+  .loading h2 { color: #1a2e4a; font-size: 1.2rem; margin-bottom: 24px; }
+  .load-step { margin-bottom: 18px; text-align: left; }
+  .load-step-label { font-size: .88rem; color: #5a7a8a; margin-bottom: 5px; }
+  .load-bar { background: #eaf4fb; border-radius: 99px; height: 10px; overflow: hidden; }
+  .load-fill { height: 100%; background: linear-gradient(90deg, #2980b9, #27ae60); border-radius: 99px; width: 0; transition: width 1.2s ease; }
+  .load-done { font-size: 1.05rem; color: #27ae60; font-weight: 700; margin-top: 18px; display: none; }
+  .result-badge { background: linear-gradient(90deg, #27ae60, #2ecc71); color: #fff; border-radius: 10px; padding: 8px 16px; display: inline-block; font-size: .83rem; font-weight: 700; margin-bottom: 12px; }
+  .result-title { font-size: 1.3rem; font-weight: 800; color: #1a2e4a; margin-bottom: 4px; }
+  .result-subtitle { font-size: .92rem; color: #7a95a5; margin-bottom: 16px; }
+  .result-quote { background: #f0faf4; border-left: 4px solid #27ae60; padding: 12px 16px; border-radius: 0 10px 10px 0; font-style: italic; color: #2c5a3a; margin-bottom: 14px; font-size: .95rem; }
+  .result-truth { margin-bottom: 14px; }
+  .result-truth strong { color: #1a2e4a; display: block; margin-bottom: 5px; }
+  .result-truth p { color: #3d6a7a; font-size: .93rem; line-height: 1.55; }
+  .stats { display: flex; gap: 12px; margin: 16px 0; }
+  .stat { background: #f0faf4; border-radius: 12px; padding: 12px; flex: 1; text-align: center; }
+  .stat-num { font-size: 1.45rem; font-weight: 800; color: #27ae60; }
+  .stat-label { font-size: .73rem; color: #5a7a8a; margin-top: 3px; line-height: 1.3; }
+  hr { border: none; border-top: 1px solid #eaf4fb; margin: 18px 0; }
+  .offer-box { background: linear-gradient(135deg, #eaf4fb, #f0faf4); border-radius: 16px; padding: 20px; margin: 16px 0; }
+  .offer-title { font-size: .97rem; font-weight: 700; color: #1a2e4a; margin-bottom: 12px; }
+  .offer-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: .88rem; color: #2c3e50; }
+  .offer-item::before { content: '\2713'; color: #27ae60; font-weight: 700; flex-shrink: 0; }
+  .bonus-box { background: #fff8e1; border: 2px dashed #f39c12; border-radius: 12px; padding: 14px; margin: 12px 0; }
+  .bonus-title { font-size: .8rem; font-weight: 700; color: #e67e22; margin-bottom: 8px; }
+  .bonus-item { font-size: .86rem; color: #5a3e10; margin-bottom: 6px; }
+  .price-old { text-align: center; color: #95aab5; font-size: .88rem; text-decoration: line-through; margin-bottom: 4px; }
+  .price-main { text-align: center; font-size: 2rem; font-weight: 800; color: #27ae60; margin-bottom: 2px; }
+  .price-inst { text-align: center; color: #5a7a8a; font-size: .82rem; margin-bottom: 16px; }
+  .timer-box { background: #fdf2f2; border: 1.5px solid #e74c3c; border-radius: 10px; padding: 10px 16px; text-align: center; margin-bottom: 14px; font-size: .88rem; color: #c0392b; font-weight: 600; }
+  .pay-icons { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+  .pay-icon { background: #eaf4fb; border-radius: 8px; padding: 5px 12px; font-size: .78rem; color: #2980b9; font-weight: 600; }
+  .guarantee { background: #f7fbff; border: 2px solid #2980b9; border-radius: 14px; padding: 16px; margin: 16px 0; text-align: center; }
+  .guarantee h3 { color: #1a2e4a; font-size: .97rem; font-weight: 700; margin-bottom: 7px; }
+  .guarantee p { color: #3d6a7a; font-size: .86rem; line-height: 1.55; }
+  .faq-item { border-bottom: 1px solid #eaf4fb; padding: 13px 0; }
+  .faq-q { font-weight: 700; color: #1a2e4a; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: .92rem; }
+  .faq-a { color: #5a7a8a; font-size: .86rem; line-height: 1.55; margin-top: 7px; display: none; }
+  .faq-a.open { display: block; }
+  .whatsapp { text-align: center; margin-top: 16px; color: #95aab5; font-size: .82rem; }
+  .whatsapp a { color: #27ae60; text-decoration: none; font-weight: 600; }
+  .restart-btn { background: none; border: none; color: #95aab5; font-size: .8rem; cursor: pointer; text-decoration: underline; display: block; margin: 12px auto 0; }
+</style>
+</head>
+<body>
+<div class="card" id="app"></div>
+<script>
+var questions = [
+  { num:1, text:"Quantos anos tem seu filho?", opts:["2-3 anos (ainda e cedo)","4-5 anos (fase certa)","6-7 anos (deveria saber, mas nao sabe)","Mais de 8 anos (ja ficou para tras)"] },
+  { num:2, text:"Quando voce tenta ensinar, o que acontece?", opts:["Ele quer fazer sozinho e se frustra rapidamente","Ele brinca das letras e nao leva a serio","Ele desvia a atencao, quer fazer outra coisa","Ele chora, diz que e dificil, e desiste"] },
+  { num:3, text:"O que mais te preocupa?", opts:["Estou insegura de como ensinar (nao sou pedagoga)","Ele recusa aprender comigo — com ninguem funciona","Fico desesperada, grito e ai piora tudo","Comparei com criancas da idade e ele esta atrasado"] },
+  { num:4, text:"Ja tentou qual desses?", opts:["Professora particular (caro e resultado fraco)","Apps e jogos educativos (so quer brincar)","Metodo tradicional de colinha (tedioso demais)","YouTube de alfabetizacao (assiste 10 min e esquece)"] },
+  { num:5, text:"Se houvesse um jeito do seu filho aprender SOZINHO, sem voce ter que ensinar, voce toparia?", opts:["Sim! So de saber que ele aprende me alivia muito","Talvez — mas como eu confio que vai funcionar?","Gostaria, mas ele tem dificuldade de concentracao","Nao tenho esperanca, ja desisti"] },
+  { num:6, text:"Qual e sua maior expectativa?", opts:["Que ele leia fluente antes de entrar na escola","Que perca o medo das letras e ganhe confianca","Que eu deixe de me sentir culpada","Que ele vire independente para aprender sozinho"] }
+];
+
+var results = [
+  {
+    badge:"DIAGNOSTICO",
+    title:"Sindrome do Professor Impostor",
+    subtitle:"Voce sente que nao sabe ensinar — mas esse nao e o problema real.",
+    quote:"Nao sou pedagoga, nao sei ensinar bem...",
+    truth:"Seu filho nao precisa de professora. Precisa de um metodo que funciona. Quando voce tira a pressao de ensinar, ele aprende naturalmente.",
+    s1:"87%", l1:"dos pais relatam que filho aprendeu melhor quando PARARAM de tentar ensinar",
+    s2:"92%", l2:"descrevem alivio imediato depois que pararam de cobrar"
+  },
+  {
+    badge:"DIAGNOSTICO",
+    title:"Crianca Provocadora",
+    subtitle:"Altamente inteligente — so nao aceita autoridade.",
+    quote:"Nao quero! Que chato!",
+    truth:"Criancas assim NAO aprendem com hierarquia (pai mandando). Aprendem com personagens que admiram. Quando muda de 'voce tem que aprender' para 'vem ver o Pipo ensinando', a resistencia desaparece.",
+    s1:"89%", l1:"aceitam aprender quando e um personagem, nao um adulto",
+    s2:"94%", l2:"pedem para assistir novamente — voluntariamente!"
+  },
+  {
+    badge:"DIAGNOSTICO",
+    title:"Cerebro Hiperativo",
+    subtitle:"Precisa de multiplos estimulos simultaneos para fixar.",
+    quote:"Nao consegue focar nem 5 minutos...",
+    truth:"Criancas assim NAO aprendem com um estimulo so. Precisam de som + imagem + ritmo + movimento ao mesmo tempo. Quando combina tudo, o cerebro FIXA a informacao.",
+    s1:"3x", l1:"mais aprendizado com multiplos estimulos (dados neurologicos)",
+    s2:"88%", l2:"melhoram concentracao apos 2 semanas de metodo audiovisual"
+  },
+  {
+    badge:"DIAGNOSTICO",
+    title:"Crianca Desacreditada",
+    subtitle:"Falhou tantas vezes que desistiu de tentar.",
+    quote:"Eu nao consigo...",
+    truth:"Ele nao tem falta de capacidade. Tem falta de CONFIANCA. Quando experimenta pequenos sucessos (uma letra por dia), a confianca volta naturalmente.",
+    s1:"91%", l1:"recuperam confianca em 3-4 semanas com metodo de pequenos sucessos",
+    s2:"85%", l2:"comecam a pedir para aprender voluntariamente"
+  }
+];
+
+var faqs = [
+  ["Meu filho tem dificuldade de concentracao. Vai conseguir?","Sim. O metodo foi criado especialmente para criancas com dificuldade de atencao. Comeca muito facil e aumenta gradualmente."],
+  ["Preciso estar junto enquanto ele aprende?","Nao! Esse e o diferencial. Ele aprende sozinho. Voce fica por perto para seguranca, mas nao precisa ensinar."],
+  ["E se ele nao gostar?","Voce tem 7 dias para testar. Se nao valer a pena, devolvemos seu dinheiro. Sem burocracia."],
+  ["Quanto tempo leva para ver resultados?","Pais relatam mudanca na confianca em 7-10 dias. Alfabetizacao real acontece em 30-60 dias."],
+  ["E assinatura? Preciso pagar todo mes?","NAO! Voce paga uma vez e tem acesso para sempre. Sem renovacao, sem surpresas."]
+];
+
+var screen = 'hero';
+var answers = [];
+var resultIdx = 0;
+var timerInterval = null;
+var app = document.getElementById('app');
+
+function getResultIndex() {
+  var counts = [0,0,0,0];
+  for (var i=0; i<answers.length; i++) counts[answers[i]]++;
+  var max = 0, idx = 0;
+  for (var j=0; j<4; j++) { if (counts[j] > max) { max = counts[j]; idx = j; } }
+  return idx;
+}
+
+function render() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  if (screen === 'hero') renderHero();
+  else if (screen === 'quiz') renderQuiz();
+  else if (screen === 'loading') renderLoading();
+  else if (screen === 'result') renderResult();
+}
+
+function renderHero() {
+  app.innerHTML =
+    '<div class="hero">' +
+    '<div class="hero-emoji">🧠</div>' +
+    '<h1>DESCUBRA POR QUE seu filho nao aprende as letras<br><span>(e como isso muda em 30 dias)</span></h1>' +
+    '<div style="background:#f0faf4;border-radius:12px;padding:14px 16px;margin-bottom:16px;border-left:4px solid #27ae60;">' +
+    '<p style="color:#1a4a2a;font-size:.9rem;font-weight:700;margin-bottom:4px;">🎬🧸 Nao e cursinho. Nao e colinha. Nao e app de joguinho.</p>' +
+    '<p style="color:#3d6a7a;font-size:.85rem;line-height:1.5;">Seu filho aprende <strong>assistindo</strong> — como se fosse desenho animado. Tao envolvente que ele nem percebe que esta estudando. 🌈✨</p>' +
+    '</div>' +
+    '<p>Responda 6 perguntas rapidas — leva menos de 2 minutos</p>' +
+    '<button class="btn-primary" id="startBtn">COMECAR MEU DIAGNOSTICO</button>' +
+    '<p class="hero-sub">Gratuito · Sem cadastro · Resultado imediato</p>' +
+    '</div>';
+  document.getElementById('startBtn').onclick = function() { answers = []; screen = 'quiz'; render(); };
+}
+
+function renderQuiz() {
+  var idx = answers.length;
+  if (idx >= questions.length) { resultIdx = getResultIndex(); screen = 'loading'; render(); return; }
+  var q = questions[idx];
+  var pct = Math.round((idx / questions.length) * 100);
+  var letters = ['A','B','C','D'];
+  var html =
+    '<div class="progress-wrap">' +
+    '<div class="progress-label"><span>Pergunta ' + (idx+1) + ' de ' + questions.length + '</span><span>' + pct + '%</span></div>' +
+    '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+    '</div>' +
+    '<div class="q-num">Pergunta ' + (idx+1) + '</div>' +
+    '<div class="q-text">' + q.text + '</div>' +
+    '<div class="options">';
+  for (var i=0; i<q.opts.length; i++) {
+    html += '<button class="opt" data-i="' + i + '"><span class="opt-letter">' + letters[i] + '</span>' + q.opts[i] + '</button>';
+  }
+  html += '</div>';
+  app.innerHTML = html;
+  var btns = app.querySelectorAll('.opt');
+  for (var j=0; j<btns.length; j++) {
+    btns[j].onclick = function() {
+      answers.push(parseInt(this.getAttribute('data-i')));
+      if (answers.length >= questions.length) { resultIdx = getResultIndex(); screen = 'loading'; render(); }
+      else { screen = 'quiz'; render(); }
+    };
+  }
+}
+
+function renderLoading() {
+  app.innerHTML =
+    '<div class="loading">' +
+    '<h2>Analisando seu caso...</h2>' +
+    '<div class="load-step"><div class="load-step-label">Entendendo a dificuldade do seu filho</div><div class="load-bar"><div class="load-fill" id="lb1"></div></div></div>' +
+    '<div class="load-step"><div class="load-step-label">Identificando o bloqueio real</div><div class="load-bar"><div class="load-fill" id="lb2"></div></div></div>' +
+    '<div class="load-step"><div class="load-step-label">Criando diagnostico personalizado</div><div class="load-bar"><div class="load-fill" id="lb3"></div></div></div>' +
+    '<div class="load-done" id="ldone">Pronto! Seu resultado chegou...</div>' +
+    '</div>';
+  setTimeout(function() { var e=document.getElementById('lb1'); if(e) e.style.width='100%'; }, 100);
+  setTimeout(function() { var e=document.getElementById('lb2'); if(e) e.style.width='100%'; }, 1300);
+  setTimeout(function() { var e=document.getElementById('lb3'); if(e) e.style.width='100%'; }, 2500);
+  setTimeout(function() { var e=document.getElementById('ldone'); if(e) e.style.display='block'; }, 3500);
+  setTimeout(function() { screen='result'; render(); }, 4500);
+}
+
+function renderResult() {
+  var r = results[resultIdx];
+  var html =
+    '<span class="result-badge">✅ ' + r.badge + '</span>' +
+    '<div class="result-title">' + r.title + '</div>' +
+    '<div class="result-subtitle">' + r.subtitle + '</div>' +
+    '<div class="result-quote">"' + r.quote + '"</div>' +
+    '<div class="result-truth"><strong>A VERDADE:</strong><p>' + r.truth + '</p></div>' +
+    '<div class="stats">' +
+    '<div class="stat"><div class="stat-num">' + r.s1 + '</div><div class="stat-label">' + r.l1 + '</div></div>' +
+    '<div class="stat"><div class="stat-num">' + r.s2 + '</div><div class="stat-label">' + r.l2 + '</div></div>' +
+    '</div>' +
+    '<hr>' +
+    '<div class="offer-box">' +
+    '<div style="background:#1a2e4a;border-radius:12px;padding:16px;margin-bottom:14px;text-align:center;">' +
+    '<p style="color:#2ecc71;font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Por que e diferente de tudo que voce ja tentou</p>' +
+    '<p style="color:#fff;font-size:.95rem;line-height:1.6;"><strong style="color:#2ecc71;">Seu filho aprende assistindo</strong> — como se fosse um desenho animado.<br>Sem parecer aula. Sem parecer chato. Sem voce ter que ensinar nada.</p>' +
+    '<div style="display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap;">' +
+    '<span style="background:rgba(255,255,255,.1);color:#cce;border-radius:99px;padding:5px 12px;font-size:.78rem;">Nao e app de joguinho</span>' +
+    '<span style="background:rgba(255,255,255,.1);color:#cce;border-radius:99px;padding:5px 12px;font-size:.78rem;">Nao e colinha chata</span>' +
+    '<span style="background:rgba(255,255,255,.1);color:#cce;border-radius:99px;padding:5px 12px;font-size:.78rem;">Nao e cursinho</span>' +
+    '</div>' +
+    '</div>' +
+    '<div class="offer-title">🎯 TUDO O QUE VOCE RECEBE:</div>' +
+    '<div class="offer-item">60 aulas em video (15 min cada) com professor especializado</div>' +
+    '<div class="offer-item">Metodo audiovisual (musica + ritmo) que ativa o cerebro infantil</div>' +
+    '<div class="offer-item">PDFs complementares para praticar (opcional)</div>' +
+    '<div class="offer-item">Audios MP3 das musicas para cantar em casa e no carro</div>' +
+    '<div class="offer-item">Acesso VITALICIO — paga uma vez, acessa para sempre</div>' +
+    '<div class="offer-item">Atualizacoes GRATIS</div>' +
+    '<div class="offer-item">Acesso em ate 4 telas (TV, celular, tablet, PC)</div>' +
+    '<div class="bonus-box">' +
+    '<div class="bonus-title">🎁 + 2 BONUS EXCLUSIVOS</div>' +
+    '<div class="bonus-item">🎁 Bonus 1 — Planners Visuais (valor R$49)<br>Para a crianca entender a rotina sem saber ler</div>' +
+    '<div class="bonus-item">🎁 Bonus 2 — Guia Superpoder do Foco com 31 dicas (valor R$29)<br>Para melhorar a concentracao</div>' +
+    '</div>' +
+    '</div>' +
+    '<div class="timer-box" id="timer">Carregando...</div>' +
+    '<div class="price-old">De: R$207,00</div>' +
+    '<div class="price-main">R$ 49,00 ✨</div>' +
+    '<div class="price-inst">ou 3x de R$19,90 no cartao</div>' +
+    '<a href="https://pay.wiapy.com/Y0mJkzb3LG" target="_blank" style="display:block;width:100%;text-decoration:none;"><button class="btn-primary" style="font-size:1rem;width:100%;">🔓 GARANTIR MEU ACESSO AGORA</button></a>' +
+    '<div class="pay-icons"><span class="pay-icon">Pix</span><span class="pay-icon">Cartao</span></div>' +
+    '<div class="guarantee"><h3>✅ GARANTIA DE 7 DIAS</h3><p>Teste tudo. Se em 7 dias voce nao estiver satisfeita por qualquer razao, devolvemos R$49,00 na sua conta. Sem perguntas, sem burocracia, sem culpa.</p></div>' +
+    '<div class="faq" id="faq"></div>' +
+    '<div class="whatsapp">Duvidas? <a href="https://wa.me/5512999999999" target="_blank">Chame no WhatsApp</a></div>' +
+    '<button class="restart-btn" id="restartBtn">Refazer o quiz</button>';
+  app.innerHTML = html;
+
+  var faqEl = document.getElementById('faq');
+  for (var i=0; i<faqs.length; i++) {
+    var d = document.createElement('div');
+    d.className = 'faq-item';
+    d.innerHTML = '<div class="faq-q">' + faqs[i][0] + ' <span>▼</span></div><div class="faq-a">✅ ' + faqs[i][1] + '</div>';
+    (function(el) {
+      el.querySelector('.faq-q').onclick = function() {
+        var a = el.querySelector('.faq-a');
+        var s = el.querySelector('span');
+        a.classList.toggle('open');
+        s.textContent = a.classList.contains('open') ? '▲' : '▼';
+      };
+    })(d);
+    faqEl.appendChild(d);
+  }
+
+  document.getElementById('restartBtn').onclick = function() { answers = []; screen = 'hero'; render(); };
+
+  var end = Date.now() + 48*3600*1000;
+  timerInterval = setInterval(function() {
+    var diff = Math.max(0, end - Date.now());
+    var h = String(Math.floor(diff/3600000)).padStart(2,'0');
+    var m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    var s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    var el = document.getElementById('timer');
+    if (el) el.textContent = '⏰ Oferta valida por: ' + h + ':' + m + ':' + s;
+    else clearInterval(timerInterval);
+  }, 1000);
+}
+
+render();
+</script>
+</body>
+</html>
